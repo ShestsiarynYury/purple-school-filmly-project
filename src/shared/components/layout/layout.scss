@@ -1,0 +1,21 @@
+.layout__wrapper {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #09090f;
+    color: white;
+}
+
+.layout__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.layout__text {
+    font-size: 20px;
+}
