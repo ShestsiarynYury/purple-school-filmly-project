@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input, model, signal } from '@angul
 import { Icons } from '../../icons';
 
 @Component({
-    selector: '<app-password-input></app-password-input>',
+    selector: 'app-password-input',
     templateUrl: './password-input.html',
     styleUrl: './password-input.scss',
     standalone: true,

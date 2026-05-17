@@ -6,7 +6,7 @@
         class="form__input"
         [type]="type()"
         [placeholder]="placeholder()"
-        [disabled]="false"
+        [disabled]="disabled()"
         [value]="value()"
         (input)="onInput($any($event.target).value)"
     />

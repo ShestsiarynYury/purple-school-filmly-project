@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
-    selector: '<app-button></app-button>',
+    selector: 'app-button',
     styleUrl: './button.scss',
     templateUrl: './button.html',
     standalone: true,

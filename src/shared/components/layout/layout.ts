@@ -6,7 +6,7 @@ import { ButtonComponent } from '../button/button';
 import { Icons } from '../../icons';
 
 @Component({
-    selector: '<app-layout></app-layout>',
+    selector: 'app-layout',
     templateUrl: './layout.html',
     styleUrl: './layout.scss',
     standalone: true,
