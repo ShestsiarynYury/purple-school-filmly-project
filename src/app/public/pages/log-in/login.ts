@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { Icons } from '../../../../shared/icons';
 import { Images } from '../../../../shared/images';
-import { NAV_CONST } from './constants';
-import { NavButtonComponent } from '../../../private/components/nav-button/nav-button';
-import { IMenu } from '../../../private/components/nav-button/models';
+import { InputComponent } from '../../../../shared/components/input/input';
+import { PasswordInputComponent } from '../../../../shared/components/password-input/password-input';
+import { ButtonComponent } from '../../../../shared/components/button/button';
 
 @Component({
     selector: 'app-login',
@@ -12,11 +11,9 @@ import { IMenu } from '../../../private/components/nav-button/models';
     styleUrl: './login.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [RouterOutlet, NavButtonComponent, RouterLink],
+    imports: [InputComponent, PasswordInputComponent, ButtonComponent],
 })
 export class LogInComponent {
     Images = Images;
     Icons = Icons;
-
-    navLinks: IMenu[] = NAV_CONST;
 }

@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ButtonComponent } from '../../../shared/components/button/button';
-import { InputComponent } from '../../../shared/components/input/input';
-import { PasswordInputComponent } from '../../../shared/components/password-input/password-input';
-import { Icons } from '../../../shared/icons';
-import { Images } from '../../../shared/images';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-layout',
@@ -11,9 +7,6 @@ import { Images } from '../../../shared/images';
     styleUrl: './layout.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [InputComponent, PasswordInputComponent, ButtonComponent],
+    imports: [RouterOutlet],
 })
-export class PublicLayoutComponent {
-    Images = Images;
-    Icons = Icons;
-}
+export class PublicLayoutComponent {}

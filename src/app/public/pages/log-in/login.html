@@ -1,26 +1,9 @@
-<div class="layout-private__wrapper">
-    <div class="layout-private__left">
-        <div class="layout-private__logo">
-            <img ngSrc="assets/images/logo.svg" width="170" height="41" alt="logo" />
-        </div>
-        <div class="layout-private__search-input">//</div>
-    </div>
-    <div class="layout-private__right">
-        <div class="layout-private__nav-menu">
-            @for (link of navLinks; track link.id) {
-                <app-nav-button
-                    class="start__dashboard-button"
-                    [text]="link.text"
-                    [iconUrl]="link.iconUrl"
-                    [iconUrlActive]="link.iconUrlActive"
-                    [routerLink]="link.url"
-                    routerLinkActive="active"
-                >
-                </app-nav-button>
-            }
-        </div>
-        <div class="layout-private__content">
-            <router-outlet></router-outlet>
-        </div>
+<div class="layout__wrapper">
+    <div class="layout__form">
+        <img class="layout__logo" alt="" [src]="Images.Logo" />
+        <p class="layout__text">Вход</p>
+        <app-input type="text" [disabled]="false" placeholder="Email" [iconUrl]="Icons.Email" />
+        <app-password-input [disabled]="false" placeholder="Password" />
+        <app-button [disabled]="false" label="Войти" />
     </div>
 </div>
