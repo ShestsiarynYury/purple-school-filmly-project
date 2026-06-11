@@ -3,8 +3,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { Icons } from '../../../../shared/icons';
 import { Images } from '../../../../shared/images';
 import { NAV_CONST } from './constants';
-import { IMenu } from '../../../private/component/nav-button/models';
-import { NavButtonComponent } from '../../../private/component/nav-button/nav-button';
+import { NavButtonComponent } from '../../../private/components/nav-button/nav-button';
+import { IMenu } from '../../../private/components/nav-button/models';
 
 @Component({
     selector: 'app-login',

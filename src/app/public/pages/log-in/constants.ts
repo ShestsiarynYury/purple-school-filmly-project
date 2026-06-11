@@ -1,4 +1,4 @@
-import { IMenu } from '../../../private/component/nav-button/models';
+import { IMenu } from '../../../private/components/nav-button/models';
 
 export const NAV_CONST: IMenu[] = [
     {
