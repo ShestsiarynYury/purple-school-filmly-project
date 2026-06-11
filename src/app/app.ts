@@ -1,11 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { LayoutComponent } from '../shared/components/layout/layout';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-root',
-    imports: [LayoutComponent],
     templateUrl: './app.html',
     styleUrl: './app.scss',
+    imports: [RouterOutlet],
 })
 export class App {
     protected readonly title = signal('filmly-project');
