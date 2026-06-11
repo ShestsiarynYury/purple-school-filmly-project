@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { PublicLayoutComponent } from './public/_layout/layout';
 import { PrivateLayoutComponent } from './private/_layout/layout';
-import { LogInComponent } from './private/pages/login/login';
 import { FavoritesComponent } from './private/pages/favorites/favorites';
 import { HomeComponent } from './private/pages/home/home';
 import { authGuard } from '../shared/guards/auth.guard';
+import { LogInComponent } from './public/pages/log-in/login';
 
 export const routes: Routes = [
     {

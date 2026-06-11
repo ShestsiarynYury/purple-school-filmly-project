@@ -1,6 +1,6 @@
-import { INavConst } from '../../../../shared/components/nav-button/models';
+import { IMenu } from '../../../private/component/nav-button/models';
 
-export const NAV_CONST: INavConst[] = [
+export const NAV_CONST: IMenu[] = [
     {
         text: 'Главная',
         iconUrl: '/icons/nav-home.svg',
