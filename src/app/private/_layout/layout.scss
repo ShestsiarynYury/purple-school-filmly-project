@@ -1,0 +1,56 @@
+.layout-private__wrapper {
+    display: flex;
+    background-color: #2b2f3a;
+    width: 100vw;
+    height: 100vh;
+}
+
+.layout-private__left,
+.layout-private__right {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.layout-private__left {
+    width: 250px; /* Or use flex: 0 0 250px to lock its size */
+    flex-shrink: 0; /* Prevents this column from getting squished */
+}
+
+.layout-private__right {
+    flex-grow: 1;
+}
+
+// .layout-private__logo {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+//     padding: 1rem;
+//     width: 236px;
+//     min-width: 236px;
+//     background-color: #1b2028;
+// }
+
+// .start__logo {
+//     display: flex;
+//     justify-content: center;
+//     margin: 0.5rem 0 2rem;
+// }
+
+.layout-private__nav-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: start;
+    flex: 1 1 auto;
+}
+
+// .start__exit-link {
+//     margin-bottom: 1.5rem;
+// }
+
+// .block__end {
+//     padding: 1rem;
+//     width: 100%;
+// }
