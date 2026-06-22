@@ -1,0 +1,21 @@
+<div class="rating">
+    @for (rating of iterabledRating(); track rating.number) {
+        @if (rating.isFill) {
+            <img
+                class="rating__star"
+                ngSrc="icons/ri-star-fill.svg"
+                alt="star"
+                width="24"
+                height="24"
+            />
+        } @else {
+            <img
+                class="rating__star"
+                ngSrc="icons/ri-star-line.svg"
+                alt="star"
+                width="24"
+                height="24"
+            />
+        }
+    }
+</div>
