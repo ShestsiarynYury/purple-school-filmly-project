@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { IMovie } from '../../../shared/models/movie.model';
+import { CardComponent } from '../../components/card/card.component';
+import { MOVIES } from '../../../shared/const/fake-films.const';
 
 @Component({
     selector: 'app-home',
@@ -6,5 +9,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     styleUrl: './home.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CardComponent],
 })
-export class HomeComponent {}
+export class HomeComponent {
+    movies = input<IMovie[]>(MOVIES);
+}

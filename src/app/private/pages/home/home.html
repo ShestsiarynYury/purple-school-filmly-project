@@ -1,1 +1,8 @@
-
+@for (movie of movies(); track movie.id) {
+    <div class="movies">
+        <app-card [card]="movie" />
+    </div>
+    >
+} @empty {
+    <p>Not Data</p>
+}

@@ -1,0 +1,19 @@
+@let cardInfo = card();
+
+@if (cardInfo) {
+    <div class="card">
+        <div>
+            @if (cardInfo.isFavorite) {
+                <img ngSrc="icons/ri-star-fill.svg" alt="star" width="52" height="52" />
+            } @else {
+                <img ngSrc="icons/ri-star-line.svg" alt="star" width="52" height="52" />
+            }
+
+            <img [ngSrc]="cardInfo.posterUrl" alt="poster" />
+        </div>
+        <div class="card__title">
+            <span>{{ cardInfo.title }}</span>
+        </div>
+        <app-rating [rating]="cardInfo.rating" />
+    </div>
+}
