@@ -5,7 +5,7 @@ export const NAV_CONST: IMenu[] = [
         text: 'Главная',
         iconUrl: '/icons/nav-home.svg',
         iconUrlActive: 'menu/dashboard-active.svg',
-        url: 'phome',
+        url: 'home',
         id: 0,
     },
     {

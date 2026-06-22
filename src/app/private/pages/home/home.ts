@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IMovie } from '../../../shared/models/movie.model';
 import { CardComponent } from '../../components/card/card.component';
+import { MOVIES } from '../../../shared/const/fake-films.const';
 
 @Component({
     selector: 'app-home',
@@ -11,5 +12,5 @@ import { CardComponent } from '../../components/card/card.component';
     imports: [CardComponent],
 })
 export class HomeComponent {
-    movies = input<IMovie[]>([]);
+    movies = input<IMovie[]>(MOVIES);
 }
