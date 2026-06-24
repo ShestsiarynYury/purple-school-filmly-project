@@ -4,6 +4,14 @@
             <img ngSrc="assets/images/logo.svg" width="170" height="41" alt="logo" />
         </div>
         <div class="layout-private__search-input">//</div>
+        <div class="layout-private__genres">
+            <h3>Жанры</h3>
+            <select name="genres" id="genres">
+                @for (gener of genres; track gener.id) {
+                    <option [value]="gener.id">{{ gener.name }}</option>
+                }
+            </select>
+        </div>
     </div>
     <div class="layout-private__right">
         <div class="layout-private__nav-menu">
