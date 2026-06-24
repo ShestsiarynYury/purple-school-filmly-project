@@ -5,6 +5,7 @@ import { Images } from '../../../shared/images';
 import { IMenu } from '../components/nav-button/models';
 import { NAV_CONST } from '../constants';
 import { NavButtonComponent } from '../components/nav-button/nav-button';
+import { GENRES, IGenre } from '../../shared/const/genres.const';
 
 @Component({
     selector: 'app-layout',
@@ -19,4 +20,5 @@ export class PrivateLayoutComponent {
     Icons = Icons;
 
     navLinks: IMenu[] = NAV_CONST;
+    genres: IGenre[] = GENRES;
 }

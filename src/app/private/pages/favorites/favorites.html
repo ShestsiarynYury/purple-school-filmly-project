@@ -1,0 +1,7 @@
+@let favoriteMovies = this.favoriteMovies();
+
+@for (favoriteMovie of favoriteMovies; track favoriteMovie.id) {
+    <app-card [card]="favoriteMovie" />
+} @empty {
+    <p>Not data</p>
+}
