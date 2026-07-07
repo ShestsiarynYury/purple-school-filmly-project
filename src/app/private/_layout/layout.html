@@ -1,33 +1,17 @@
-<div class="layout-private__wrapper">
-    <div class="layout-private__left">
-        <div class="layout-private__logo">
-            <img ngSrc="assets/images/logo.svg" width="170" height="41" alt="logo" />
+<div class="layout-private">
+    <app-header />
+    <div class="layout-private__content-container">
+        <div class="layout-private__menu">
+            <div class="layout-private__genres">
+                <h3>Жанры</h3>
+                <select name="genres" id="genres">
+                    @for (gener of genres; track gener.id) {
+                        <option [value]="gener.id">{{ gener.name }}</option>
+                    }
+                </select>
+            </div>
         </div>
-        <div class="layout-private__search-input">//</div>
-        <div class="layout-private__genres">
-            <h3>Жанры</h3>
-            <select name="genres" id="genres">
-                @for (gener of genres; track gener.id) {
-                    <option [value]="gener.id">{{ gener.name }}</option>
-                }
-            </select>
-        </div>
-    </div>
-    <div class="layout-private__right">
-        <div class="layout-private__nav-menu">
-            @for (link of navLinks; track link.id) {
-                <app-nav-button
-                    class="start__dashboard-button"
-                    [text]="link.text"
-                    [iconUrl]="link.iconUrl"
-                    [iconUrlActive]="link.iconUrlActive"
-                    [routerLink]="link.url"
-                    routerLinkActive="active"
-                >
-                </app-nav-button>
-            }
-        </div>
-        <div class="layout-private__content">
+        <div class="layout-private__page">
             <router-outlet></router-outlet>
         </div>
     </div>

@@ -4,7 +4,7 @@ import { Injectable, signal } from '@angular/core';
     providedIn: 'root',
 })
 export class AuthService {
-    isAuthenticated = signal(false); // Изменить на false!
+    isAuthenticated = signal(true); // Изменить на false!
 
     login() {
         this.isAuthenticated.set(true);

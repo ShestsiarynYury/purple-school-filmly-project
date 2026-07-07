@@ -1,12 +1,13 @@
 <button
+    type="button"
     class="nav-button"
     [ngClass]="{ 'nav__button--active': isActive }"
     (click)="onClick($event)"
 >
-    @if (isActive && iconUrlActive !== null) {
-        <img [ngSrc]="iconUrlActive" width="24" height="24" alt="active icon" />
+    @if (isActive && iconUrlActive() !== null) {
+        <img [ngSrc]="iconUrlActive()" width="24" height="24" alt="active icon" />
     } @else {
-        <img [ngSrc]="iconUrl" width="24" height="24" alt="non-active icon" />
+        <img [ngSrc]="iconUrl()" width="24" height="24" alt="non-active icon" />
     }
     <span>{{ text() }}</span>
 </button>

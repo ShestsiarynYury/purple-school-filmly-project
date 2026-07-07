@@ -1,23 +1,23 @@
-.layout-private__wrapper {
+.layout-private {
     display: flex;
     background-color: #2b2f3a;
     width: 100vw;
     height: 100vh;
 }
 
-.layout-private__left,
-.layout-private__right {
+.layout-private__menu,
+.layout-private__page {
     display: flex;
     height: 100%;
     flex-direction: column;
 }
 
-.layout-private__left {
+.layout-private__menu {
     width: 250px; /* Or use flex: 0 0 250px to lock its size */
     flex-shrink: 0; /* Prevents this column from getting squished */
 }
 
-.layout-private__right {
+.layout-private__page {
     flex-grow: 1;
 }
 

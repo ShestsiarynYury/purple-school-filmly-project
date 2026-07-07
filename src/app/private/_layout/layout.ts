@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { Icons } from '../../../shared/icons';
 import { Images } from '../../../shared/images';
-import { IMenu } from '../components/nav-button/models';
-import { NAV_CONST } from '../constants';
-import { NavButtonComponent } from '../components/nav-button/nav-button';
 import { GENRES, IGenre } from '../../shared/const/genres.const';
+import { HeaderComponent } from '../components/header/header.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-layout',
@@ -13,12 +11,11 @@ import { GENRES, IGenre } from '../../shared/const/genres.const';
     styleUrl: './layout.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [RouterOutlet, NavButtonComponent, RouterLink],
+    imports: [RouterOutlet, HeaderComponent],
 })
 export class PrivateLayoutComponent {
     Images = Images;
     Icons = Icons;
 
-    navLinks: IMenu[] = NAV_CONST;
     genres: IGenre[] = GENRES;
 }
