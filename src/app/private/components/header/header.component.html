@@ -1,0 +1,20 @@
+<div class="header">
+    <div class="header__logo">
+        <img ngSrc="images/Logo.png" width="170" height="41" alt="logo" />
+    </div>
+    <div class="header__search-input">//</div>
+    <div class="header__nav-menu">
+        @for (link of navLinks; track link.id) {
+            <app-nav-button
+                class="start__dashboard-button"
+                [text]="link.text"
+                [iconUrl]="link.iconUrl"
+                [iconUrlActive]="link.iconUrlActive"
+                [routerLink]="link.url"
+                routerLinkActive="active"
+            >
+            </app-nav-button>
+        }
+    </div>
+    <h1>{{ title() }}</h1>
+</div>
