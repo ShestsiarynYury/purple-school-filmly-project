@@ -1,4 +1,4 @@
-@let favoriteMovies = this.favoriteMovies | async;
+@let favoriteMovies = this.favoriteMovies();
 
 @for (favoriteMovie of favoriteMovies; track favoriteMovie.id) {
     <app-card [card]="favoriteMovie" />

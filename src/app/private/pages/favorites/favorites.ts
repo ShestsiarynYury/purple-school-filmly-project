@@ -17,7 +17,7 @@ import { FAKE_FAVORITES } from '../../../shared/const/fake-favorites.cont';
 export class FavoritesComponent implements OnInit {
     private _storeService = inject(StoreService);
 
-    favorites: Signal<IMovie[] | undefined> = toSignal(
+    favoriteMovies: Signal<IMovie[] | undefined> = toSignal(
         this._storeService.getValueAsync('favorites'),
         {
             initialValue: [],

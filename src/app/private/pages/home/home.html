@@ -1,4 +1,6 @@
-@for (movie of movies | async; track movie.id) {
+@let movies = this.movies();
+
+@for (movie of movies; track movie.id) {
     <div class="movies">
         <app-card [card]="movie" />
     </div>
