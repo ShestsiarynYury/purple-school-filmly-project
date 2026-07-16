@@ -1,6 +1,6 @@
 import { IMovie } from '../models/movie.model';
 
-export const MOVIES: IMovie[] = [
+export const FAKE_MOVIES: IMovie[] = [
     {
         id: 'm_002',
         title: 'Interstellar',
