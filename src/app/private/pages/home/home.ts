@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-// import { IMovie } from '../../../shared/models/movie.model';
+import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
-import { MOVIES } from '../../../shared/const/fake-films.const';
-import { delay, of } from 'rxjs';
+import { FAKE_MOVIES } from '../../../shared/const/fake-films.const';
 import { AsyncPipe } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { StoreService } from '../../../../shared/services/store.service';
+import { IMovie } from '../../../shared/models/movie.model';
 
 @Component({
     selector: 'app-home',
@@ -13,7 +14,14 @@ import { AsyncPipe } from '@angular/common';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CardComponent, AsyncPipe],
 })
-export class HomeComponent {
-    // movies = input<IMovie[]>(MOVIES);
-    movies = of(MOVIES).pipe(delay(1000));
+export class HomeComponent implements OnInit {
+    private _storeService = inject(StoreService);
+
+    movies: Signal<IMovie[] | undefined> = toSignal(this._storeService.getValueAsync('movies'), {
+        initialValue: [],
+    });
+
+    ngOnInit(): void {
+        this._storeService.setValue('movies', FAKE_MOVIES);
+    }
 }

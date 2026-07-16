@@ -1,7 +1,7 @@
 import { IMovie } from '../models/movie.model';
 
 // favorites.const.ts
-export const FAVORITES: IMovie[] = [
+export const FAKE_FAVORITES: IMovie[] = [
     {
         id: 'm_002',
         title: 'Interstellar',

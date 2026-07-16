@@ -2,8 +2,18 @@
     <div class="layout__form">
         <img class="layout__logo" alt="" [src]="Images.Logo" />
         <p class="layout__text">Вход</p>
-        <app-input type="text" [disabled]="false" placeholder="Email" [iconUrl]="Icons.Email" />
-        <app-password-input [disabled]="false" placeholder="Password" />
+        <app-input
+            type="text"
+            [disabled]="false"
+            placeholder="Email"
+            [iconUrl]="Icons.Email"
+            (controlValue)="onInputChange('username', $event?.target?.value)"
+        />
+        <app-password-input
+            [disabled]="false"
+            placeholder="Password"
+            (controlValue)="onInputChange('password', $event?.target?.value)"
+        />
         <app-button [disabled]="false" label="Войти" />
     </div>
 </div>
