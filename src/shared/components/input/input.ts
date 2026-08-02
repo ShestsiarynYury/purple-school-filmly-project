@@ -25,7 +25,7 @@ export class InputComponent implements ControlValueAccessor {
 
     type = input.required<'text' | 'email'>();
     placeholder = input<string>('');
-    iconUrl = input<string | null>(null);
+    iconUrl = input<string>('');
 
     innerValue = '';
     disabled = false;
