@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { delay, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgOptimizedImage } from '@angular/common';
+import { SearchInputComponent } from '../../../../shared/components/search-input/search-input.component';
 
 @Component({
     selector: 'app-header',
@@ -21,7 +22,13 @@ import { NgOptimizedImage } from '@angular/common';
     styleUrl: './header.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NavButtonComponent, RouterLink, NgOptimizedImage],
+    imports: [
+        NavButtonComponent,
+        RouterLink,
+        NgOptimizedImage,
+        SearchInputComponent,
+        SearchInputComponent,
+    ],
 })
 export class HeaderComponent implements OnInit {
     private _titleService = inject(Title);

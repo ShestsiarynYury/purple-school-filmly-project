@@ -1,19 +1,18 @@
 <div class="layout__wrapper">
-    <div class="layout__form">
+    @if (error) {
+        <div class="layout__errors">{{ error }}</div>
+    }
+
+    <form class="layout__form" [formGroup]="form">
         <img class="layout__logo" alt="" [src]="Images.Logo" />
         <p class="layout__text">Вход</p>
         <app-input
+            formControlName="email"
             type="text"
-            [disabled]="false"
             placeholder="Email"
             [iconUrl]="Icons.Email"
-            (controlValue)="onInputChange('username', $event?.target?.value)"
         />
-        <app-password-input
-            [disabled]="false"
-            placeholder="Password"
-            (controlValue)="onInputChange('password', $event?.target?.value)"
-        />
-        <app-button [disabled]="false" label="Войти" />
-    </div>
+        <app-password-input formControlName="password" placeholder="Password" />
+        <app-button [disabled]="false" type="submit" label="Войти" (btnClick)="onLoginClick()" />
+    </form>
 </div>

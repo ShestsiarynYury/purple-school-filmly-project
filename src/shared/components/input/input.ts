@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'app-input',
@@ -6,18 +7,48 @@ import { ChangeDetectionStrategy, Component, input, model, output } from '@angul
     styleUrl: './input.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputComponent),
+            multi: true,
+        },
+    ],
 })
-export class InputComponent {
+export class InputComponent implements ControlValueAccessor {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    private onChange: (value: string) => void = (value: string) => {};
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    private onTouched: () => void = () => {};
+
     type = input.required<'text' | 'email'>();
     placeholder = input<string>('');
-    disabled = input.required<boolean>();
     iconUrl = input<string | null>(null);
 
-    inputEvent = output<string>();
+    innerValue = '';
+    disabled = false;
 
-    value = model<string>('');
+    writeValue(value: string): void {
+        this.innerValue = value;
+    }
 
-    onInput(input: string) {
-        this.inputEvent.emit(input);
+    registerOnChange(fn: (value: string) => void): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: () => void): void {
+        this.onTouched = fn;
+    }
+
+    setDisabledState?(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
+    handleInput(event: Event) {
+        const target = event.target as HTMLInputElement;
+        const value = target.value;
+        this.innerValue = value;
+        this.onChange(value);
+        this.onTouched();
     }
 }

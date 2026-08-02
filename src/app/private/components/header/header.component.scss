@@ -1,0 +1,14 @@
+.header {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.header__left {
+    width: 300px; /* Фиксированная ширина */
+    flex-shrink: 0; /* Запрещает колонке сжиматься меньше 300px */
+}
+
+.header__right {
+    flex-grow: 1; /* Занимает всё доступное пространство */
+}

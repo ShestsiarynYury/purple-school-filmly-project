@@ -1,13 +1,17 @@
 .form__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 16px;
     background-color: #d89c00;
     color: #fff;
-    padding: 12px 70px;
     border: none;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
     transition: 0.3s ease-in-out;
+    width: 140px;
+    height: 52px;
 }
 
 .form__button:hover {

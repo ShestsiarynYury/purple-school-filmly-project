@@ -7,6 +7,14 @@ import { ButtonComponent } from '../../../../shared/components/button/button';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { take, tap, catchError, of } from 'rxjs';
+import {
+    FormControl,
+    FormGroup,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators,
+} from '@angular/forms';
+import { noSpaceValidator } from '../../../../shared/validators/no-space.validator';
 
 @Component({
     selector: 'app-login',
@@ -14,31 +22,29 @@ import { take, tap, catchError, of } from 'rxjs';
     styleUrl: './login.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [InputComponent, PasswordInputComponent, ButtonComponent],
+    imports: [
+        InputComponent,
+        PasswordInputComponent,
+        ButtonComponent,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
 })
 export class LogInComponent {
     private _authService = inject(AuthService);
-    private _formValue: { username: string | null; password: string | null } = {
-        username: null,
-        password: null,
-    };
     private _router: Router = inject(Router);
 
     error = '';
     Images = Images;
     Icons = Icons;
 
-    onInputChange(control: 'username' | 'password', value: string) {
-        this._formValue[control] = value;
-    }
-
     onLoginClick(): void {
-        if (this._formValue.username == null || this._formValue.password == null) {
+        if (this.form.controls.email.value == null || this.form.controls.password.value == null) {
             return;
         }
 
         this._authService
-            .login$(this._formValue.username, this._formValue.password)
+            .login$(this.form.controls.email.value, this.form.controls.password.value)
             .pipe(
                 take(1),
                 tap(() => this._router.navigate(['private'])),
@@ -50,4 +56,9 @@ export class LogInComponent {
             )
             .subscribe();
     }
+
+    form = new FormGroup({
+        email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+        password: new FormControl('', { validators: [Validators.required, noSpaceValidator()] }),
+    });
 }
