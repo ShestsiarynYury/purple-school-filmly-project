@@ -1,13 +1,7 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    forwardRef,
-    input,
-    model,
-    signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, input, signal } from '@angular/core';
 import { Icons } from '../../icons';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
     selector: 'app-password-input',
@@ -22,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
             multi: true,
         },
     ],
+    imports: [NgOptimizedImage],
 })
 export class PasswordInputComponent implements ControlValueAccessor {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -54,5 +49,13 @@ export class PasswordInputComponent implements ControlValueAccessor {
 
     setDisabledState?(isDisabled: boolean): void {
         this.disabled = isDisabled;
+    }
+
+    handleInput(event: Event) {
+        const target = event.target as HTMLInputElement;
+        const value = target.value;
+        this.innerValue = value;
+        this._onChange(value);
+        this._onTouch();
     }
 }
