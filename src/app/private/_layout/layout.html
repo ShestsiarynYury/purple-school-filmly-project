@@ -2,14 +2,16 @@
     <app-header />
     <div class="layout-private__content-container">
         <div class="layout-private__menu">
-            <div class="layout-private__genres">
+            <form class="layout-private__genres" [formGroup]="form">
+                <app-search-input formControlName="name" />
+
                 <h3>Жанры</h3>
-                <select name="genres" id="genres">
+                <select formControlName="genre" id="genres">
                     @for (gener of genres; track gener.id) {
                         <option [value]="gener.id">{{ gener.name }}</option>
                     }
                 </select>
-            </div>
+            </form>
         </div>
         <div class="layout-private__page">
             <router-outlet></router-outlet>

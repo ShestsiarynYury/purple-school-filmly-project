@@ -7,7 +7,6 @@ export interface IAppStore {
     genres: IGenre[];
     movies: IMovie[];
     favorites: IMovie[];
-
     filters: {
         name: string;
         genre: number | null;
@@ -51,11 +50,34 @@ export class StoreService {
         );
     }
 
+    getFormValueAsync<K extends keyof IAppStore['filters']>(
+        key: K,
+    ): Observable<IAppStore['filters'][K]> {
+        return this._storeSubject.asObservable().pipe(
+            map((state) => {
+                return state.filters[key];
+            }),
+        );
+    }
+
     // setter
     setValue<K extends keyof IAppStore>(key: K, value: IAppStore[K]): void {
         this._storeSubject.next({
             ...this._storeSubject.getValue(),
             [key]: value,
+        });
+    }
+
+    public setFormValue<K extends keyof IAppStore['filters']>(
+        key: K,
+        value: IAppStore['filters'][K],
+    ): void {
+        this._storeSubject.next({
+            ...this._storeSubject.getValue(),
+            filters: {
+                ...this._storeSubject.getValue().filters,
+                [key]: value,
+            },
         });
     }
 }
