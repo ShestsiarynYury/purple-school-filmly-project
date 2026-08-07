@@ -12,7 +12,18 @@
             placeholder="Email"
             [iconUrl]="Icons.Email"
         />
+        @if (this.form.controls.email.invalid && this.form.controls.email.touched) {
+            <span>Ошибка поля email</span>
+        }
         <app-password-input formControlName="password" placeholder="Password" />
-        <app-button [disabled]="false" type="submit" label="Войти" (btnClick)="onLoginClick()" />
+        @if (this.form.controls.password.invalid && this.form.controls.password.touched) {
+            <span>Ошибка поля password</span>
+        }
+        <app-button
+            [disabled]="this.invalid()"
+            type="submit"
+            label="Войти"
+            (btnClicked)="onLoginClick()"
+        />
     </form>
 </div>

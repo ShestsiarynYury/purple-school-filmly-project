@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    DestroyRef,
+    inject,
+    OnInit,
+    signal,
+} from '@angular/core';
 import { Icons } from '../../../../shared/icons';
 import { Images } from '../../../../shared/images';
 import { InputComponent } from '../../../../shared/components/input/input';
@@ -15,6 +23,7 @@ import {
     Validators,
 } from '@angular/forms';
 import { noSpaceValidator } from '../../../../shared/validators/no-space.validator';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-login',
@@ -30,13 +39,32 @@ import { noSpaceValidator } from '../../../../shared/validators/no-space.validat
         ReactiveFormsModule,
     ],
 })
-export class LogInComponent {
+export class LogInComponent implements OnInit {
     private _authService = inject(AuthService);
     private _router: Router = inject(Router);
-
-    error = '';
+    private destroyRef = inject(DestroyRef);
     Images = Images;
     Icons = Icons;
+    error = null;
+    form = new FormGroup({
+        email: new FormControl('', { validators: [Validators.required, Validators.email] }),
+        password: new FormControl('', { validators: [Validators.required, noSpaceValidator()] }),
+    });
+    invalid = signal<boolean>(true);
+
+    ngOnInit(): void {
+        this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+
+        this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((status) => {
+            if (status === 'INVALID') {
+                this.invalid.set(true);
+            }
+
+            if (status === 'VALID') {
+                this.invalid.set(false);
+            }
+        });
+    }
 
     onLoginClick(): void {
         if (this.form.controls.email.value == null || this.form.controls.password.value == null) {
@@ -56,9 +84,4 @@ export class LogInComponent {
             )
             .subscribe();
     }
-
-    form = new FormGroup({
-        email: new FormControl('', { validators: [Validators.required, Validators.email] }),
-        password: new FormControl('', { validators: [Validators.required, noSpaceValidator()] }),
-    });
 }

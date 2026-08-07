@@ -11,9 +11,9 @@ export class ButtonComponent {
     label = input.required<string>();
     disabled = input.required<boolean>();
 
-    clickEventEmitter = output();
+    btnClicked = output();
 
     onClick() {
-        this.clickEventEmitter.emit();
+        this.btnClicked.emit();
     }
 }
