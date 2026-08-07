@@ -53,7 +53,9 @@ export class LogInComponent implements OnInit {
     invalid = signal<boolean>(true);
 
     ngOnInit(): void {
-        this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
+        this.form.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
+            const { email, password } = value;
+        });
 
         this.form.statusChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((status) => {
             if (status === 'INVALID') {

@@ -13,11 +13,21 @@
             [iconUrl]="Icons.Email"
         />
         @if (this.form.controls.email.invalid && this.form.controls.email.touched) {
-            <span>Ошибка поля email</span>
+            @if (this.form.controls.email.errors?.['required']) {
+                <span>email обязателен</span>
+            }
+            @if (this.form.controls.email.errors?.['email']) {
+                <span>email не сооьветсвует шаблону</span>
+            }
         }
         <app-password-input formControlName="password" placeholder="Password" />
         @if (this.form.controls.password.invalid && this.form.controls.password.touched) {
-            <span>Ошибка поля password</span>
+            @if (this.form.controls.email.errors?.['required']) {
+                <span>password обязателен</span>
+            }
+            @if (this.form.controls.password.errors?.['noSpaces']) {
+                <span>password не должно быть пробелов</span>
+            }
         }
         <app-button
             [disabled]="this.invalid()"
