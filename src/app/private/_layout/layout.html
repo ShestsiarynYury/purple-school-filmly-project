@@ -3,7 +3,7 @@
     <div class="layout-private__content-container">
         <div class="layout-private__menu">
             <form class="layout-private__genres" [formGroup]="form">
-                <app-search-input formArrayName="name" />
+                <app-search-input formControlName="name" />
 
                 <h3>Жанры</h3>
                 <select formControlName="genre" id="genres">

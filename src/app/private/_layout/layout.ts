@@ -39,7 +39,7 @@ export class PrivateLayoutComponent implements OnInit {
     genres: IGenre[] = GENRES;
 
     form = new FormGroup({
-        name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+        name: new FormControl<string>('', { nonNullable: true }),
         genre: new FormControl<number | null>(null, { nonNullable: false }),
         from: new FormControl<number | null>(null, { nonNullable: false }),
         to: new FormControl<number | null>(null, { nonNullable: false }),
