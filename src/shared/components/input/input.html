@@ -1,5 +1,5 @@
 <div class="form__control">
-    <div class="form__icon">
+    <div class="form__control-prefix">
         <img [ngSrc]="iconUrl()" width="30" height="30" alt="icon" />
     </div>
     <input
@@ -9,4 +9,9 @@
         [disabled]="disabled"
         (input)="handleInput($event)"
     />
+    @if (iconUrlPostfix()) {
+        <div class="form__control-postfix">
+            <img [ngSrc]="iconUrlPostfix()" width="30" height="30" alt="icon" />
+        </div>
+    }
 </div>
