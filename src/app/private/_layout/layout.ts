@@ -4,13 +4,7 @@ import { Images } from '../../../shared/images';
 import { GENRES, IGenre } from '../../shared/const/genres.const';
 import { HeaderComponent } from '../components/header/header.component';
 import { RouterOutlet } from '@angular/router';
-import {
-    FormControl,
-    FormGroup,
-    FormsModule,
-    ReactiveFormsModule,
-    Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from '../../../shared/components/search-input/search-input.component';
 import { StoreService } from '../../../shared/services/store.service';
 import { debounceTime, map } from 'rxjs';

@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 import { delay, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgOptimizedImage } from '@angular/common';
+import { AuthService } from '../../../../shared/services/auth.service';
 
 @Component({
     selector: 'app-header',
@@ -24,10 +25,12 @@ import { NgOptimizedImage } from '@angular/common';
     imports: [NavButtonComponent, RouterLink, NgOptimizedImage],
 })
 export class HeaderComponent implements OnInit {
+    private _authService = inject(AuthService);
     private _titleService = inject(Title);
     private _router = inject(Router);
     private _destroyRef = inject(DestroyRef);
     private _activatedRoute = inject(ActivatedRoute);
+    private _authservice = inject(AuthService);
 
     title = signal<string>('');
 
@@ -45,5 +48,17 @@ export class HeaderComponent implements OnInit {
                 takeUntilDestroyed(this._destroyRef),
             )
             .subscribe();
+
+        this._authService.isAuthenticated$
+            .pipe(takeUntilDestroyed(this._destroyRef))
+            .subscribe((isAuth) => {
+                if (!isAuth) {
+                    this._router.navigate(['/paublic']);
+                }
+            });
+    }
+
+    onLogout(): void {
+        this._authservice.logout$().subscribe();
     }
 }
