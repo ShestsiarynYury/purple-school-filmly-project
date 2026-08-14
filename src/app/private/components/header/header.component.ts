@@ -9,7 +9,7 @@ import {
 import { NavButtonComponent } from '../nav-button/nav-button';
 import { NAV_CONST } from '../../constants';
 import { IMenu } from '../nav-button/models';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { delay, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -30,8 +30,6 @@ export class HeaderComponent implements OnInit {
     private _titleService = inject(Title);
     private _router = inject(Router);
     private _destroyRef = inject(DestroyRef);
-    private _activatedRoute = inject(ActivatedRoute);
-    private _authservice = inject(AuthService);
 
     title = signal<string>('');
 
@@ -57,9 +55,5 @@ export class HeaderComponent implements OnInit {
                     this._router.navigate(['/public']);
                 }
             });
-    }
-
-    onLogout(): void {
-        this._authservice.logout$().subscribe();
     }
 }
