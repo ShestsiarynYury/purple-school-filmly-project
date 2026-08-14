@@ -7,9 +7,19 @@
 
                 <h3>Жанры</h3>
                 <select formControlName="genre" id="genres">
-                    @for (gener of genres; track gener.id) {
+                    @for (gener of genres(); track gener.id) {
                         <option [value]="gener.id">{{ gener.name }}</option>
                     }
+                </select>
+
+                <div>От <input type="number" formControlName="from" /></div>
+                <div>До <input type="number" formControlName="to" /></div>
+
+                <h3>Сортировка</h3>
+                <select formControlName="sort" id="sort">
+                    <option value="name">по имени</option>
+                    <option value="genre">по жанру</option>
+                    <option value="rating">по рейтингу</option>
                 </select>
             </form>
         </div>

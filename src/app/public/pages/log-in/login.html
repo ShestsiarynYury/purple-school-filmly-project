@@ -22,7 +22,7 @@
         }
         <app-password-input formControlName="password" placeholder="Password" />
         @if (this.form.controls.password.invalid && this.form.controls.password.touched) {
-            @if (this.form.controls.email.errors?.['required']) {
+            @if (this.form.controls.password.errors?.['required']) {
                 <span>password обязателен</span>
             }
             @if (this.form.controls.password.errors?.['noSpaces']) {

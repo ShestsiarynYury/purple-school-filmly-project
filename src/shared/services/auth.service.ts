@@ -1,27 +1,54 @@
-import { Injectable } from '@angular/core';
-import { Observable, of, delay, tap, mergeMap, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Observable, tap, catchError, map, EMPTY, BehaviorSubject } from 'rxjs';
+import { AuthStoreService, IAppAuthStore } from './auth-store.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    login$(username: string, password: string): Observable<boolean> {
-        const emailRegex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
-        const isEmailValid = emailRegex.test(username);
-        const isPasswordValid = password.trim().length > 0;
-        const isAuthenticated = isEmailValid && isPasswordValid;
+    private _httpClient = inject(HttpClient);
+    private _authStoreService = inject(AuthStoreService);
 
-        return of(isAuthenticated).pipe(
-            delay(100),
-            tap((v) => (this.isAuthenticated = v)),
-            mergeMap((v) => (v ? of(v) : throwError(() => new Error('User login failed')))),
-        );
+    login$(email: string, password: string): Observable<boolean> {
+        return this._httpClient
+            .post<IAppAuthStore>('http://localhost:3000/api/v1/auth', { email, password })
+            .pipe(
+                tap((response) => {
+                    this._updateAuthDate(response);
+                }),
+                map((response) => response?.token != null),
+                catchError(() => {
+                    return EMPTY;
+                }),
+            );
     }
 
     logout$(): Observable<boolean> {
-        this.isAuthenticated = false;
-        return of(this.isAuthenticated).pipe(delay(100));
+        return this._httpClient.post<string>('http://localhost:3000/api/v1/auth', null).pipe(
+            tap(() => {
+                this._updateAuthDate(null);
+                this.isAuthenticated$.next(false);
+            }),
+            map(() => this.isAuthenticated$.getValue()),
+        );
     }
 
-    isAuthenticated = true;
+    private _updateAuthDate(data: IAppAuthStore | null): void {
+        if (data != null) {
+            this._authStoreService.setValue('token', data.token);
+            this._authStoreService.setValue('tokenType', data.tokenType);
+            this._authStoreService.setValue('expiresIn', data.expiresIn);
+
+            this.isAuthenticated$.next(true);
+        } else {
+            this._authStoreService.setValue('token', null);
+            this._authStoreService.setValue('tokenType', null);
+            this._authStoreService.setValue('expiresIn', null);
+
+            this.isAuthenticated$.next(false);
+        }
+    }
+
+    isAuthenticated$ = new BehaviorSubject(false);
 }

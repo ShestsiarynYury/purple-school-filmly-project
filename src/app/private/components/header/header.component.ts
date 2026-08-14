@@ -9,11 +9,13 @@ import {
 import { NavButtonComponent } from '../nav-button/nav-button';
 import { NAV_CONST } from '../../constants';
 import { IMenu } from '../nav-button/models';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { delay, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgOptimizedImage } from '@angular/common';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { ExitComponent } from '../../../../shared/components/exit/exit.component';
 
 @Component({
     selector: 'app-header',
@@ -21,13 +23,13 @@ import { NgOptimizedImage } from '@angular/common';
     styleUrl: './header.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NavButtonComponent, RouterLink, NgOptimizedImage],
+    imports: [NavButtonComponent, RouterLink, NgOptimizedImage, ExitComponent],
 })
 export class HeaderComponent implements OnInit {
+    private _authService = inject(AuthService);
     private _titleService = inject(Title);
     private _router = inject(Router);
     private _destroyRef = inject(DestroyRef);
-    private _activatedRoute = inject(ActivatedRoute);
 
     title = signal<string>('');
 
@@ -45,5 +47,7 @@ export class HeaderComponent implements OnInit {
                 takeUntilDestroyed(this._destroyRef),
             )
             .subscribe();
+
+        this._authService.isAuthenticated$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
     }
 }

@@ -6,7 +6,7 @@ export const authGuard = (route: ActivatedRouteSnapshot, state: RouterStateSnaps
     const authService = inject(AuthService);
     const router = inject(Router);
 
-    if (authService.isAuthenticated) {
+    if (authService.isAuthenticated$.getValue()) {
         return true;
     }
 
