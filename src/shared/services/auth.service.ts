@@ -50,5 +50,5 @@ export class AuthService {
         }
     }
 
-    isAuthenticated$ = new BehaviorSubject(true);
+    isAuthenticated$ = new BehaviorSubject(false);
 }
