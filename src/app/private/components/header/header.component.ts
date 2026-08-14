@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
             .pipe(takeUntilDestroyed(this._destroyRef))
             .subscribe((isAuth) => {
                 if (!isAuth) {
-                    this._router.navigate(['/paublic']);
+                    this._router.navigate(['/public']);
                 }
             });
     }
