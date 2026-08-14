@@ -15,6 +15,7 @@ import { delay, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { ExitComponent } from '../../../../shared/components/exit/exit.component';
 
 @Component({
     selector: 'app-header',
@@ -22,7 +23,7 @@ import { AuthService } from '../../../../shared/services/auth.service';
     styleUrl: './header.component.scss',
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NavButtonComponent, RouterLink, NgOptimizedImage],
+    imports: [NavButtonComponent, RouterLink, NgOptimizedImage, ExitComponent],
 })
 export class HeaderComponent implements OnInit {
     private _authService = inject(AuthService);
