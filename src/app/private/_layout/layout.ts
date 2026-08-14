@@ -64,11 +64,31 @@ export class PrivateLayoutComponent implements OnInit {
                     this._httpService.updateFavorites$(value).subscribe();
                 }
 
-                if (this._router.url.includes('movies')) {
+                if (this._router.url.includes('home')) {
                     this._httpService.updateMovies$(value).subscribe();
                 }
             });
 
         this._httpService.updateGenres$().subscribe();
+
+        this._httpService
+            .updateMovies$({
+                name: '',
+                genre: null,
+                from: 1000,
+                to: 2026,
+                sort: 'genre',
+            })
+            .subscribe();
+
+        this._httpService
+            .updateFavorites$({
+                name: '',
+                genre: 1000,
+                from: 2026,
+                to: null,
+                sort: 'genre',
+            })
+            .subscribe();
     }
 }
