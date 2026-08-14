@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-exit',
@@ -9,8 +10,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ExitComponent {
     private _authservice = inject(AuthService);
+    private _router = inject(Router);
 
     onLogout(): void {
-        this._authservice.logout$().subscribe();
+        this._authservice.logout$().subscribe(() => {
+            this._router.navigate(['/public']);
+        });
     }
 }

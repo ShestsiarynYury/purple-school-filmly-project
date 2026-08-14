@@ -39,4 +39,26 @@ export class HttpService {
                 }),
             );
     }
+
+    public updateFavorites$(value: {
+        name: string;
+        genre: number | null;
+        from: number | null;
+        to: number | null;
+        sort: 'genre' | 'name' | 'rating';
+    }): Observable<IMovie[]> {
+        const params = new HttpParams()
+            .set('genre', `${value.genre}`)
+            .set('from', `${value.from}`)
+            .set('to', `${value.to}`)
+            .set('sort', `${value.sort}`);
+
+        return this._httpClient
+            .get<IMovie[]>('http://localhost:3000/api/v1/favorites', { params })
+            .pipe(
+                tap((response) => {
+                    this._storeService.setValue('favorites', response);
+                }),
+            );
+    }
 }

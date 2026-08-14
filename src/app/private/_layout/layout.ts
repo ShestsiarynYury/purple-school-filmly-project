@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '
 import { Icons } from '../../../shared/icons';
 import { Images } from '../../../shared/images';
 import { HeaderComponent } from '../components/header/header.component';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from '../../../shared/components/search-input/search-input.component';
 import { StoreService } from '../../../shared/services/store.service';
@@ -28,6 +28,7 @@ export class PrivateLayoutComponent implements OnInit {
     private _httpService = inject(HttpService);
     private _storeService = inject(StoreService);
     private _destroyRef = inject(DestroyRef);
+    private _router = inject(Router);
     Images = Images;
     Icons = Icons;
 
@@ -58,7 +59,14 @@ export class PrivateLayoutComponent implements OnInit {
             )
             .subscribe((value) => {
                 this._storeService.setValue('filters', value);
-                this._httpService.updateMovies$(value).subscribe();
+
+                if (this._router.url.includes('favorites')) {
+                    this._httpService.updateFavorites$(value).subscribe();
+                }
+
+                if (this._router.url.includes('movies')) {
+                    this._httpService.updateMovies$(value).subscribe();
+                }
             });
 
         this._httpService.updateGenres$().subscribe();
