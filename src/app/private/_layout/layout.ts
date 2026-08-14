@@ -71,24 +71,8 @@ export class PrivateLayoutComponent implements OnInit {
 
         this._httpService.updateGenres$().subscribe();
 
-        this._httpService
-            .updateMovies$({
-                name: '',
-                genre: null,
-                from: 1000,
-                to: 2026,
-                sort: 'genre',
-            })
-            .subscribe();
+        this._httpService.updateMovies$(this._storeService.getValue('filters')).subscribe();
 
-        this._httpService
-            .updateFavorites$({
-                name: '',
-                genre: 1000,
-                from: 2026,
-                to: null,
-                sort: 'genre',
-            })
-            .subscribe();
+        this._httpService.updateFavorites$(this._storeService.getValue('filters')).subscribe();
     }
 }

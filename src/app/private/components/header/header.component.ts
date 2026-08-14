@@ -47,7 +47,5 @@ export class HeaderComponent implements OnInit {
                 takeUntilDestroyed(this._destroyRef),
             )
             .subscribe();
-
-        this._authService.isAuthenticated$.pipe(takeUntilDestroyed(this._destroyRef)).subscribe();
     }
 }
