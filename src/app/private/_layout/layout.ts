@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Icons } from '../../../shared/icons';
 import { Images } from '../../../shared/images';
-import { GENRES, IGenre } from '../../shared/const/genres.const';
 import { HeaderComponent } from '../components/header/header.component';
 import { RouterOutlet } from '@angular/router';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from '../../../shared/components/search-input/search-input.component';
 import { StoreService } from '../../../shared/services/store.service';
 import { debounceTime, map } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { HttpService } from '../../../shared/services/http.service';
 
 @Component({
     selector: 'app-layout',
@@ -25,12 +25,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     ],
 })
 export class PrivateLayoutComponent implements OnInit {
+    private _httpService = inject(HttpService);
     private _storeService = inject(StoreService);
     private _destroyRef = inject(DestroyRef);
     Images = Images;
     Icons = Icons;
 
-    genres: IGenre[] = GENRES;
+    readonly genres = toSignal(this._storeService.getValueAsync('genres'));
 
     form = new FormGroup({
         name: new FormControl<string>('', { nonNullable: true }),
@@ -55,6 +56,11 @@ export class PrivateLayoutComponent implements OnInit {
                     sort: value['sort'] ?? 'name', // default to 'name' if undefined
                 })),
             )
-            .subscribe((value) => this._storeService.setValue('filters', value));
+            .subscribe((value) => {
+                this._storeService.setValue('filters', value);
+                this._httpService.updateMovies$(value).subscribe();
+            });
+
+        this._httpService.updateGenres$().subscribe();
     }
 }

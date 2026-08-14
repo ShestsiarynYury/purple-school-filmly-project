@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Signal } from '@angular/core';
 import { CardComponent } from '../../components/card/card.component';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { StoreService } from '../../../../shared/services/store.service';
 import { IMovie } from '../../../shared/models/movie.model';
-import { FAKE_FAVORITES } from '../../../shared/const/fake-favorites.cont';
 
 @Component({
     selector: 'app-favorites',
@@ -13,7 +12,7 @@ import { FAKE_FAVORITES } from '../../../shared/const/fake-favorites.cont';
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CardComponent],
 })
-export class FavoritesComponent implements OnInit {
+export class FavoritesComponent {
     private _storeService = inject(StoreService);
 
     favoriteMovies: Signal<IMovie[] | undefined> = toSignal(
@@ -23,7 +22,7 @@ export class FavoritesComponent implements OnInit {
         },
     );
 
-    ngOnInit(): void {
-        this._storeService.setValue('favorites', FAKE_FAVORITES);
-    }
+    // ngOnInit(): void {
+    //     this._storeService.setValue('favorites', FAKE_FAVORITES);
+    // }
 }
